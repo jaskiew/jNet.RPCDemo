@@ -178,7 +178,7 @@ There is two ways od executing methods:
 ### Getting and setting properties
 
 Set is ProxyBase method that sets and send immidiatly EventNotofication. 
-Attribute `JsonProperty(...)` and `JsonIgnore` decide which data send and which store only locally.
+Attribute `JsonProperty(...)` and `JsonIgnore` decide which data send and which store only locally. 
 
 
 ```C#
