@@ -68,6 +68,7 @@ Start with *using directive* and create instance of ***ServerHost()*** declaring
     using jNet.RPC.Server;	
 
 	//...
+    var host = new ServerHost() { ListenPort = 1234 };
     var host = new ServerHost() { ListenPort = 9999 };
 ```
 Initialize ***ServerHost()*** passing in parameters:
@@ -164,11 +165,19 @@ There is two ways od executing methods:
  - Invoke
 
 ```C#
+public IMessage AddMessage(string message)
+        {
+            return Query<Message>(parameters: new object[] { message });
+        }
 	public IMessage AddMessage(string message)
     {
    		return Query<Message>(parameters: new object[] { message });
     }
 
+        public bool DelMessage(int messageid)
+        {
+            return Query<bool>(parameters: new object[] { messageid });
+        }
     public bool DelMessage(int messageid)
     {
      	return Query<bool>(parameters: new object[] { messageid });
@@ -178,10 +187,31 @@ There is two ways od executing methods:
 ### Getting and setting properties
 
 Set is ProxyBase method that sets and send immidiatly EventNotofication. 
+Attribute `JsonProperty(...)` and `JsonIgnore` decide which data send and which store only locally.
 Attribute `JsonProperty(...)` and `JsonIgnore` decide which data send and which store only locally. 
 
 
 ```C#
+ public class Message : ProxyBase, IMessage
+    {
+
+        [JsonProperty(nameof(MessageId))]
+        private int _messageId;
+
+        [JsonProperty(nameof(MessageContent))]
+        private string _message;
+
+        [JsonIgnore]
+        public string MessageContent { get => _message; set => Set(value); }
+
+        [JsonIgnore]
+        public int MessageId { get => _messageId; set => Set(value); }
+
+        protected override void OnEventNotification(SocketMessage message)
+        {
+
+        }
+    }
  	public class Message : ProxyBase, IMessage
 	    {
 	
