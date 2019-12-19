@@ -8,18 +8,11 @@ namespace jNet.RPCDemoClient.Proxy
     public class Message : ProxyBase, IMessage
     {
 
-        [JsonProperty(nameof(MessageId))]
-        private int _messageId;
-
         [JsonProperty(nameof(MessageContent))]
-        private string _message;
+        public string MessageContent { get; set; }
 
-
-        [JsonIgnore]
-        public string MessageContent { get => _message; set => Set(value); }
-
-        [JsonIgnore]
-        public int MessageId { get => _messageId; set => Set(value); }
+        [JsonProperty(nameof(MessageId))]
+        public int MessageId { get; set; }
 
         protected override void OnEventNotification(SocketMessage message)
         {

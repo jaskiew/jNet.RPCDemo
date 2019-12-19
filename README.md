@@ -164,15 +164,15 @@ There is two ways od executing methods:
  - Invoke
 
 ```C#
-public IMessage AddMessage(string message)
-        {
-            return Query<Message>(parameters: new object[] { message });
-        }
+	public IMessage AddMessage(string message)
+    {
+   		return Query<Message>(parameters: new object[] { message });
+    }
 
-        public bool DelMessage(int messageid)
-        {
-            return Query<bool>(parameters: new object[] { messageid });
-        }
+    public bool DelMessage(int messageid)
+    {
+     	return Query<bool>(parameters: new object[] { messageid });
+    }
 ```
 
 ### Getting and setting properties
@@ -182,24 +182,18 @@ Attribute `JsonProperty(...)` and `JsonIgnore` decide which data send and which 
 
 
 ```C#
- public class Message : ProxyBase, IMessage
-    {
-
-        [JsonProperty(nameof(MessageId))]
-        private int _messageId;
-
-        [JsonProperty(nameof(MessageContent))]
-        private string _message;
-
-        [JsonIgnore]
-        public string MessageContent { get => _message; set => Set(value); }
-
-        [JsonIgnore]
-        public int MessageId { get => _messageId; set => Set(value); }
-
-        protected override void OnEventNotification(SocketMessage message)
-        {
-
-        }
-    }
+ 	public class Message : ProxyBase, IMessage
+	    {
+	
+	         [JsonProperty(nameof(MessageContent))]
+	        public string MessageContent { get; set; }
+	
+	        [JsonProperty(nameof(MessageId))]
+	        public int MessageId { get; set; }
+	
+	        protected override void OnEventNotification(SocketMessage message)
+	        {
+				//Must exist because of IMessage interface
+	        }
+	    }
 ```
