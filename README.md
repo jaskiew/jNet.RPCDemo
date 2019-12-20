@@ -24,7 +24,7 @@ Corresponding client classes currently should be written manually, but they are 
 
 We'll need also a server `ServerHost` and client `RemoteClient` classes to maintain communication. And mapping between server and client classes, in a class that implements `Newtonsoft.Json.Serialization.ISerializationBinder`. That's all.
 
-A simple example of usage may be found in [CollaborativeEditor](https://github.com/jaskie/CollaborativeEditor) project.
+An example of usage may be found in [CollaborativeEditor](https://github.com/jaskie/CollaborativeEditor) project.
 
 # jNet.RPC Tutorial
 
@@ -39,7 +39,7 @@ A simple example of usage may be found in [CollaborativeEditor](https://github.c
 ## Setting Up
 
 ### NuGet Package
-You can find package on [www.nuget.org](https://www.nuget.org/packages/jNet.RPC)
+You can find package on [www.nuget.org](https://www.nuget.org/packages/jNet.RPC) an check current version.
 
 Installation
 
@@ -160,8 +160,8 @@ and send notification on change of object/variable on Your client
 ### Executing Methods
 
 There is two ways od executing methods:
- - Query
- - Invoke
+ - Query -> for functions that return values
+ - Invoke -> if function is void
 
 ```C#
 public IMessage AddMessage(string message)
@@ -178,7 +178,7 @@ public IMessage AddMessage(string message)
 ### Getting and setting properties
 
 Set is ProxyBase method that sets and send immidiatly EventNotofication. 
-Attribute `JsonProperty(...)` and `JsonIgnore` decide which data send and which store only locally.
+Attribute `JsonProperty(...)` and eventually`JsonIgnore` decide which data send and which store only locally.
 
 
 ```C#
